@@ -35,7 +35,9 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: |
+          pnpm config set dangerouslyAllowAllBuilds true
+          pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm run build
