@@ -415,9 +415,7 @@ h2 {
   align-content: center;
   justify-content: center;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 45% 35%, #fff0b8 0 8%, transparent 9%),
-    radial-gradient(circle, #774020 0%, #4e2d1c 78%);
+  background: radial-gradient(circle, #774020 0%, #4e2d1c 78%);
   color: #ffe9bd;
   text-align: center;
   padding: 22px;
