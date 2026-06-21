@@ -1,0 +1,585 @@
+:root {
+  color: #332316;
+  background: #f6d28f;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Microsoft YaHei", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  border: 0;
+  font: inherit;
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.45), transparent 28%),
+    linear-gradient(160deg, #ffd78e 0%, #f4a65f 48%, #bd6740 100%);
+}
+
+.phone-frame {
+  width: min(100vw, 390px);
+  height: min(100vh, 844px);
+  min-height: 720px;
+  overflow: hidden;
+  background: #fff5df;
+  position: relative;
+  box-shadow: 0 28px 90px rgba(72, 35, 11, 0.25);
+}
+
+.screen {
+  height: 100%;
+  overflow-y: auto;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.landing-screen {
+  justify-content: space-between;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.68), transparent 30%),
+    linear-gradient(180deg, #ffe8aa 0%, #ffc46e 54%, #f08d55 100%);
+}
+
+.landing-hero {
+  height: 260px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.pot-logo {
+  width: 176px;
+  height: 176px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fffaf0;
+  font-size: 94px;
+  box-shadow: inset 0 -14px 0 rgba(120, 58, 20, 0.08), 0 20px 40px rgba(126, 67, 24, 0.2);
+}
+
+.steam {
+  position: absolute;
+  width: 42px;
+  height: 84px;
+  border-radius: 50%;
+  border-left: 8px solid rgba(255, 255, 255, 0.75);
+  top: 16px;
+}
+
+.steam-one {
+  left: 112px;
+  transform: rotate(20deg);
+}
+
+.steam-two {
+  right: 116px;
+  transform: rotate(-12deg);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #a45f2e;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: 34px;
+  line-height: 1.05;
+}
+
+h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.subtitle,
+.screen-header p,
+.cooking-header p {
+  color: #744830;
+}
+
+.primary-button,
+.secondary-button,
+.mini-button {
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary-button {
+  color: #fff9ed;
+  background: #352012;
+  box-shadow: 0 10px 0 #9d552d;
+}
+
+.primary-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.secondary-button,
+.mini-button {
+  background: #ffe1a8;
+  color: #4c2c19;
+}
+
+.text-button {
+  align-self: flex-start;
+  padding: 8px 0;
+  background: transparent;
+  color: #8d4f2d;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.screen-header.compact {
+  gap: 0;
+}
+
+.song-list,
+.prep-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.song-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 18px;
+  background: #fffaf0;
+  box-shadow: 0 6px 18px rgba(83, 45, 22, 0.08);
+  text-align: left;
+  cursor: pointer;
+}
+
+.cover-fallback {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(140deg, #ffd06f, #ff8e65);
+  font-size: 38px;
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.song-info span,
+.song-info small,
+.ingredient-source,
+.section-title span {
+  color: #7b5942;
+}
+
+.flavor-grid {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: #fffaf0;
+}
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.meter-track {
+  height: 10px;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #f0d8b4;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f39243, #402518);
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 10px;
+}
+
+.section-title h2 {
+  margin-bottom: 0;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ingredient-card {
+  min-height: 118px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 16px;
+  background: #fffaf0;
+  box-shadow: 0 5px 14px rgba(82, 44, 20, 0.08);
+  cursor: pointer;
+}
+
+.ingredient-card.is-selected,
+.ingredient-card.is-cooked {
+  outline: 3px solid #e86f3c;
+  background: #fff0cb;
+}
+
+.ingredient-emoji {
+  font-size: 34px;
+}
+
+.ingredient-name {
+  font-weight: 900;
+}
+
+.ingredient-source {
+  font-size: 11px;
+}
+
+.bottom-action {
+  margin-top: auto;
+  width: 100%;
+}
+
+.prep-category {
+  display: grid;
+  gap: 8px;
+}
+
+.category-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-row h2 {
+  margin: 0;
+}
+
+.choice-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 122px;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.cooking-screen {
+  padding-bottom: 16px;
+}
+
+.cooking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.heat-control {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 5px;
+  border-radius: 18px;
+  background: #ffe1a8;
+}
+
+.heat-control button {
+  min-height: 54px;
+  border-radius: 14px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.heat-control button.active {
+  background: #352012;
+  color: #fff7e8;
+}
+
+.heat-control span,
+.heat-control small {
+  display: block;
+}
+
+.cooktop {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 92px 1fr 78px;
+  gap: 10px;
+  align-items: center;
+  min-height: 410px;
+}
+
+.selected-rail,
+.seasoning-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: stretch;
+  justify-content: center;
+}
+
+.selected-rail h2,
+.seasoning-panel h2 {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.selected-rail .ingredient-card {
+  min-height: 78px;
+  padding: 6px;
+}
+
+.selected-rail .ingredient-emoji {
+  font-size: 25px;
+}
+
+.selected-rail .ingredient-source {
+  display: none;
+}
+
+.pan {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 16px;
+  background: #26201b;
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 20px 34px rgba(66, 32, 12, 0.28);
+}
+
+.pan-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: center;
+  justify-content: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 45% 35%, #fff0b8 0 8%, transparent 9%),
+    radial-gradient(circle, #774020 0%, #4e2d1c 78%);
+  color: #ffe9bd;
+  text-align: center;
+  padding: 22px;
+}
+
+.pan-food {
+  font-size: 30px;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
+}
+
+.pan-handle {
+  position: absolute;
+  width: 66px;
+  height: 28px;
+  right: -48px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: #2a201a;
+}
+
+.heat-low {
+  box-shadow: 0 16px 28px rgba(64, 98, 140, 0.2);
+}
+
+.heat-high {
+  box-shadow: 0 18px 38px rgba(234, 77, 37, 0.42);
+}
+
+.seasoning-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.seasoning {
+  min-height: 58px;
+  border-radius: 15px;
+  background: #fffaf0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.seasoning span {
+  font-size: 24px;
+}
+
+.seasoning small {
+  font-size: 10px;
+}
+
+.seasoning.active {
+  outline: 3px solid #e86f3c;
+  background: #fff0cb;
+}
+
+.cooking-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.3fr;
+  gap: 10px;
+}
+
+.hint {
+  margin: 0;
+  color: #8d4f2d;
+  text-align: center;
+  font-size: 13px;
+}
+
+.result-screen {
+  background: linear-gradient(180deg, #fff5df, #ffe3af);
+}
+
+.result-screen h1 {
+  font-size: 30px;
+}
+
+.result-duration {
+  color: #744830;
+}
+
+.recipe-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: #fffaf0;
+  box-shadow: 0 10px 24px rgba(77, 39, 16, 0.1);
+}
+
+.result-food {
+  font-size: 58px;
+  text-align: center;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.result-stat {
+  min-height: 76px;
+  border-radius: 15px;
+  background: #352012;
+  color: #fff7e8;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.result-stat span {
+  font-size: 11px;
+  color: #ffd896;
+}
+
+.result-stat strong {
+  font-size: 22px;
+}
+
+.used-list {
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255, 250, 240, 0.72);
+}
+
+.used-list h2 {
+  margin-bottom: 5px;
+}
+
+.used-list p {
+  color: #69442d;
+}
+
+.result-actions {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 460px) {
+  .app-shell {
+    padding: 24px;
+  }
+
+  .phone-frame {
+    border-radius: 34px;
+  }
+}
+
+@media (max-width: 360px) {
+  .screen {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .cooktop {
+    grid-template-columns: 78px 1fr 66px;
+    gap: 7px;
+  }
+
+  .pan-handle {
+    display: none;
+  }
+}
