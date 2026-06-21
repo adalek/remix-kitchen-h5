@@ -1,5 +1,13 @@
 import { useEffect, type Dispatch, type SetStateAction } from 'react';
-import { initAudio, replaceTrack, resetAllTracks, setHeatLevel, setSeasoningEffects, startTransport, toggleTrack } from '../audio/audioEngine';
+import {
+  initAudio,
+  replaceTrack,
+  resetAllTracks,
+  setHeatLevel,
+  setSeasoningEffects,
+  startTransport,
+  toggleTrack,
+} from '../audio/audioEngine';
 import type { IngredientOption, Song } from '../data/songManifest';
 import HeatControl, { type HeatLevel } from './HeatControl';
 import IngredientCard from './IngredientCard';
@@ -40,6 +48,7 @@ function CookingScreen({
 
   const addIngredient = async (ingredient: IngredientOption) => {
     await initAudio();
+
     if (cookedIds.includes(ingredient.id)) {
       toggleTrack(ingredient.audioTrackId);
       setCookedItems((current) => current.filter((item) => item.id !== ingredient.id));
@@ -116,14 +125,11 @@ function CookingScreen({
       </div>
 
       <footer className="cooking-actions">
-        <button className="secondary-button" type="button" onClick={startTransport}>
-          Play
-        </button>
         <button className="secondary-button" type="button" onClick={resetPan}>
-          Reset
+          重置
         </button>
         <button className="primary-button" type="button" disabled={!canServe} onClick={onServe}>
-          Serve
+          出锅
         </button>
       </footer>
 
