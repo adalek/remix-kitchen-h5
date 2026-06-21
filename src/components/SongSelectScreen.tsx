@@ -2,13 +2,17 @@ import type { Song } from '../data/songManifest';
 
 type SongSelectScreenProps = {
   songs: Song[];
+  onBack: () => void;
   onSelect: (song: Song) => void;
 };
 
-function SongSelectScreen({ songs, onSelect }: SongSelectScreenProps) {
+function SongSelectScreen({ songs, onBack, onSelect }: SongSelectScreenProps) {
   return (
     <section className="screen">
       <header className="screen-header">
+        <button className="text-button" type="button" onClick={onBack}>
+          ← 回首页
+        </button>
         <p className="eyebrow">Step 1</p>
         <h1>选择曲目</h1>
         <p>选一首你心爱的歌，AI 厨师会把它拆成食材。</p>

@@ -67,7 +67,7 @@ function App() {
     <main className="app-shell">
       <div className="phone-frame">
         {screen === 'landing' && <LandingScreen onStart={() => setScreen('select')} />}
-        {screen === 'select' && <SongSelectScreen songs={songs} onSelect={chooseSong} />}
+        {screen === 'select' && <SongSelectScreen songs={songs} onBack={() => setScreen('landing')} onSelect={chooseSong} />}
         {screen === 'analysis' && (
           <RecipeAnalysisScreen
             song={currentSong}

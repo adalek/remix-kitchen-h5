@@ -430,11 +430,11 @@ h2 {
 
 .pan-handle {
   position: absolute;
-  width: 66px;
-  height: 28px;
-  right: -48px;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 34px;
+  height: 76px;
+  left: 50%;
+  bottom: -58px;
+  transform: translateX(-50%);
   border-radius: 999px;
   background: #2a201a;
 }
@@ -580,6 +580,8 @@ h2 {
   }
 
   .pan-handle {
-    display: none;
+    width: 30px;
+    height: 58px;
+    bottom: -42px;
   }
 }
