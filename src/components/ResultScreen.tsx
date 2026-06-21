@@ -84,7 +84,7 @@ function ResultScreen({ song, ingredients, seasonings, heat, onCookAgain, onHome
 
       <div className="result-actions">
         <button className="secondary-button" type="button" onClick={onHome}>
-          保存到菜谱本
+          分享菜谱
         </button>
         <button className="primary-button" type="button" onClick={onCookAgain}>
           再做一次
