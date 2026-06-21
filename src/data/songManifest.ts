@@ -1,5 +1,7 @@
 import { coverAssets, ingredientAssets, seasoningAssets } from './assetManifest';
 
+const publicAsset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
+
 export type FlavorProfile = {
   energy: number;
   brightness: number;
@@ -89,21 +91,21 @@ export const ingredientOptions: Record<IngredientCategory, IngredientOption[]> =
 export const audioManifest = {
   bpm: 120,
   tracks: [
-    { id: 'drums-rice', category: 'base', path: '/audio/loops/drums/rice.wav' },
-    { id: 'drums-potato', category: 'base', path: '/audio/loops/drums/potato.wav' },
-    { id: 'drums-bread', category: 'base', path: '/audio/loops/drums/bread.wav' },
-    { id: 'bass-pepper', category: 'bass', path: '/audio/loops/bass/pepper.wav' },
-    { id: 'bass-beef', category: 'bass', path: '/audio/loops/bass/beef.wav' },
-    { id: 'bass-mushroom', category: 'bass', path: '/audio/loops/bass/mushroom.wav' },
-    { id: 'chords-onion', category: 'chords', path: '/audio/loops/chords/onion.wav' },
-    { id: 'chords-cheese', category: 'chords', path: '/audio/loops/chords/cheese.wav' },
-    { id: 'chords-shiitake', category: 'chords', path: '/audio/loops/chords/shiitake.wav' },
-    { id: 'atmos-vinyl', category: 'atmosphere', path: '/audio/loops/atmosphere/vinyl.wav' },
-    { id: 'atmos-rain', category: 'atmosphere', path: '/audio/loops/atmosphere/rain.wav' },
-    { id: 'atmos-moon', category: 'atmosphere', path: '/audio/loops/atmosphere/moon.wav' },
-    { id: 'vocal-berry', category: 'vocal', path: '/audio/loops/vocal/berry.wav' },
-    { id: 'vocal-lemon', category: 'vocal', path: '/audio/loops/vocal/lemon.wav' },
-    { id: 'vocal-mint', category: 'vocal', path: '/audio/loops/vocal/mint.wav' },
+    { id: 'drums-rice', category: 'base', path: publicAsset('audio/loops/drums/rice.wav') },
+    { id: 'drums-potato', category: 'base', path: publicAsset('audio/loops/drums/potato.wav') },
+    { id: 'drums-bread', category: 'base', path: publicAsset('audio/loops/drums/bread.wav') },
+    { id: 'bass-pepper', category: 'bass', path: publicAsset('audio/loops/bass/pepper.wav') },
+    { id: 'bass-beef', category: 'bass', path: publicAsset('audio/loops/bass/beef.wav') },
+    { id: 'bass-mushroom', category: 'bass', path: publicAsset('audio/loops/bass/mushroom.wav') },
+    { id: 'chords-onion', category: 'chords', path: publicAsset('audio/loops/chords/onion.wav') },
+    { id: 'chords-cheese', category: 'chords', path: publicAsset('audio/loops/chords/cheese.wav') },
+    { id: 'chords-shiitake', category: 'chords', path: publicAsset('audio/loops/chords/shiitake.wav') },
+    { id: 'atmos-vinyl', category: 'atmosphere', path: publicAsset('audio/loops/atmosphere/vinyl.wav') },
+    { id: 'atmos-rain', category: 'atmosphere', path: publicAsset('audio/loops/atmosphere/rain.wav') },
+    { id: 'atmos-moon', category: 'atmosphere', path: publicAsset('audio/loops/atmosphere/moon.wav') },
+    { id: 'vocal-berry', category: 'vocal', path: publicAsset('audio/loops/vocal/berry.wav') },
+    { id: 'vocal-lemon', category: 'vocal', path: publicAsset('audio/loops/vocal/lemon.wav') },
+    { id: 'vocal-mint', category: 'vocal', path: publicAsset('audio/loops/vocal/mint.wav') },
   ],
 } as const;
 

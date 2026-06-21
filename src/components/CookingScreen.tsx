@@ -1,5 +1,5 @@
 import { useEffect, type Dispatch, type SetStateAction } from 'react';
-import { replaceTrack, resetAllTracks, setHeatLevel, setSeasoningEffects, startTransport } from '../audio/audioEngine';
+import { initAudio, replaceTrack, resetAllTracks, setHeatLevel, setSeasoningEffects, startTransport } from '../audio/audioEngine';
 import type { IngredientOption, Song } from '../data/songManifest';
 import HeatControl, { type HeatLevel } from './HeatControl';
 import IngredientCard from './IngredientCard';
@@ -39,8 +39,9 @@ function CookingScreen({
   }, [heat, seasonings]);
 
   const addIngredient = async (ingredient: IngredientOption) => {
-    await startTransport();
+    await initAudio();
     replaceTrack(ingredient.category, ingredient.audioTrackId);
+    await startTransport();
     setCookedItems((current) => {
       const withoutCategory = current.filter((item) => item.category !== ingredient.category);
       return [...withoutCategory, ingredient];

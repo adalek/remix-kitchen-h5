@@ -156,6 +156,11 @@ export async function loadTracks(manifest: AudioManifest) {
 
 export async function startTransport() {
   await initAudio();
+  try {
+    await Tone.loaded();
+  } catch (error) {
+    console.warn('[audioEngine] Audio buffers did not finish loading before playback.', error);
+  }
   if (Tone.Transport.state !== 'started') {
     Tone.Transport.start();
   }
