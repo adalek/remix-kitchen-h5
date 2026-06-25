@@ -1,6 +1,18 @@
 :root {
   color: #332316;
   background: #f6d28f;
+  --soda-cream: #fff7cc;
+  --soda-paper: #fffaf1;
+  --soda-ink: #42213f;
+  --soda-muted: #6b5c72;
+  --soda-orange: #e8732a;
+  --soda-wine: #861b24;
+  --soda-purple: #8423c6;
+  --soda-pink: #cf5fe2;
+  --soda-cyan: #68cbd0;
+  --soda-lime: #6dde4a;
+  --soda-red: #cf333b;
+  --soda-yellow: #fff34a;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Microsoft YaHei", sans-serif;
@@ -56,8 +68,7 @@ button {
   scrollbar-width: none;
 }
 
-.screen::-webkit-scrollbar,
-.choice-row::-webkit-scrollbar {
+.screen::-webkit-scrollbar {
   display: none;
 }
 
@@ -359,8 +370,28 @@ p {
   grid-auto-columns: 122px;
   gap: 10px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding: 0 22px 4px 0;
   scrollbar-width: none;
+}
+
+.choice-row::-webkit-scrollbar {
+  display: none;
+}
+
+.prep-category {
+  position: relative;
+}
+
+.prep-category::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  width: 34px;
+  height: 118px;
+  pointer-events: none;
+  border-radius: 0 16px 16px 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 247, 204, 0.9));
 }
 
 .cooking-screen {
@@ -682,6 +713,589 @@ p {
   gap: 10px;
 }
 
+/* Fruit soda visual pass */
+.app-shell {
+  background:
+    linear-gradient(90deg, rgba(109, 222, 74, 0.18) 0 25%, rgba(104, 203, 208, 0.18) 25% 50%, rgba(255, 243, 74, 0.18) 50% 75%, rgba(207, 95, 226, 0.18) 75% 100%),
+    #f7f3ee;
+}
+
+.phone-frame {
+  background: var(--soda-cream);
+  box-shadow: 0 18px 0 rgba(66, 33, 63, 0.08), 0 30px 90px rgba(66, 33, 63, 0.18);
+}
+
+.screen {
+  color: var(--soda-ink);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.68), transparent 28%),
+    var(--soda-cream);
+}
+
+.landing-screen {
+  background: linear-gradient(90deg, var(--soda-lime) 0 25%, var(--soda-cyan) 25% 50%, #fff2c4 50% 75%, var(--soda-pink) 75% 100%);
+}
+
+.landing-hero {
+  isolation: isolate;
+}
+
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  width: 282px;
+  height: 176px;
+  border-radius: 24px;
+  background: linear-gradient(90deg, var(--soda-red) 0 25%, var(--soda-orange) 25% 50%, var(--soda-lime) 50% 75%, var(--soda-purple) 75% 100%);
+  box-shadow: 0 16px 0 rgba(66, 33, 63, 0.18);
+  z-index: -1;
+}
+
+.pot-logo {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 40%),
+    var(--soda-paper);
+  box-shadow: inset 0 -14px 0 rgba(66, 33, 63, 0.1), 0 18px 0 rgba(66, 33, 63, 0.18);
+}
+
+h1 {
+  color: var(--soda-ink);
+}
+
+.eyebrow {
+  color: var(--soda-purple);
+}
+
+.subtitle,
+.screen-header p,
+.cooking-header p,
+.result-duration {
+  color: var(--soda-muted);
+}
+
+.primary-button {
+  background: var(--soda-purple);
+  color: #fffaf1;
+  box-shadow: 0 8px 0 #5c1590;
+}
+
+.secondary-button,
+.mini-button {
+  background: var(--soda-yellow);
+  color: var(--soda-ink);
+  box-shadow: 0 5px 0 rgba(66, 33, 63, 0.16);
+}
+
+.text-button {
+  color: var(--soda-wine);
+}
+
+.song-card,
+.flavor-grid,
+.ingredient-card,
+.recipe-card,
+.used-list {
+  border-radius: 14px;
+  border: 3px solid rgba(255, 255, 255, 0.78);
+  background: var(--soda-paper);
+  box-shadow: 0 8px 0 rgba(66, 33, 63, 0.1);
+}
+
+.song-card:nth-child(1) {
+  background: linear-gradient(135deg, #ff6961 0%, var(--soda-red) 100%);
+  color: #fffaf1;
+}
+
+.song-card:nth-child(2) {
+  background: linear-gradient(135deg, var(--soda-yellow) 0%, var(--soda-orange) 100%);
+}
+
+.song-card:nth-child(3) {
+  background: linear-gradient(135deg, var(--soda-cyan) 0%, var(--soda-purple) 100%);
+  color: #fffaf1;
+}
+
+.song-card:nth-child(1) .song-info span,
+.song-card:nth-child(1) .song-info small,
+.song-card:nth-child(3) .song-info span,
+.song-card:nth-child(3) .song-info small {
+  color: rgba(255, 250, 241, 0.82);
+}
+
+.cover-fallback {
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.46), transparent 42%),
+    linear-gradient(140deg, var(--soda-yellow), var(--soda-orange));
+  box-shadow: inset 0 -8px 0 rgba(66, 33, 63, 0.1);
+}
+
+.song-info span,
+.song-info small,
+.ingredient-source,
+.section-title span {
+  color: rgba(66, 33, 63, 0.68);
+}
+
+.meter-track {
+  background: rgba(66, 33, 63, 0.12);
+}
+
+.meter-fill {
+  background: linear-gradient(90deg, var(--soda-lime), var(--soda-cyan), var(--soda-purple));
+}
+
+.ingredient-card.is-selected,
+.ingredient-card.is-cooked {
+  border-color: var(--soda-ink);
+  background: var(--soda-yellow);
+  box-shadow: 0 8px 0 rgba(66, 33, 63, 0.18);
+}
+
+.heat-control {
+  border-radius: 14px;
+  background: rgba(255, 250, 241, 0.76);
+  border: 3px solid rgba(255, 255, 255, 0.62);
+  box-shadow: 0 7px 0 rgba(66, 33, 63, 0.1);
+}
+
+.heat-control button.active {
+  background: var(--soda-ink);
+  color: #fffaf1;
+  box-shadow: 0 6px 0 rgba(66, 33, 63, 0.18);
+}
+
+.cooking-screen.heat-low {
+  background: linear-gradient(90deg, var(--soda-cyan) 0 50%, var(--soda-lime) 50% 100%);
+}
+
+.cooking-screen.heat-medium {
+  background: linear-gradient(90deg, var(--soda-yellow) 0 50%, var(--soda-orange) 50% 100%);
+}
+
+.cooking-screen.heat-high {
+  background: linear-gradient(90deg, var(--soda-red) 0 50%, var(--soda-pink) 50% 100%);
+}
+
+.pan {
+  background: radial-gradient(circle at 50% 52%, #d2d2d2 0 56%, #737373 57% 66%, #272727 67% 100%);
+  box-shadow: 0 14px 0 rgba(66, 33, 63, 0.22), 0 22px 36px rgba(66, 32, 12, 0.22);
+}
+
+.pan::before {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.pan .pan-inner {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.18), transparent 24%),
+    radial-gradient(circle, #f6a247 0%, #be4e21 78%);
+}
+
+.pan.heat-low .pan-inner {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.28), transparent 25%),
+    radial-gradient(circle, #62d2da 0%, #218c9a 78%);
+}
+
+.pan.heat-medium .pan-inner {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.22), transparent 24%),
+    radial-gradient(circle, #ffbe37 0%, var(--soda-orange) 78%);
+}
+
+.pan.heat-high .pan-inner {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.22), transparent 24%),
+    radial-gradient(circle, #d6343c 0%, var(--soda-wine) 78%);
+}
+
+.pan-handle {
+  background: linear-gradient(180deg, #efefef 0%, #787878 100%);
+  box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.18), 0 7px 0 rgba(66, 33, 63, 0.16);
+}
+
+.seasoning {
+  border-radius: 14px;
+  background: var(--soda-paper);
+  border: 3px solid rgba(255, 255, 255, 0.78);
+}
+
+.seasoning.active {
+  border-color: var(--soda-ink);
+  background: var(--soda-lime);
+  box-shadow: 0 6px 0 rgba(66, 33, 63, 0.16);
+}
+
+.result-screen {
+  background:
+    linear-gradient(90deg, rgba(255, 243, 74, 0.76) 0 50%, rgba(104, 203, 208, 0.62) 50% 100%),
+    var(--soda-cream);
+}
+
+.result-stat {
+  border-radius: 14px;
+  background: var(--soda-purple);
+}
+
+/* Cooking screen redesign */
+.cooking-screen {
+  gap: 14px;
+  overflow: hidden;
+}
+
+.cooking-screen.heat-low {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 241, 0.9), transparent 30%),
+    linear-gradient(135deg, rgba(104, 203, 208, 0.95) 0 44%, rgba(255, 250, 241, 0.9) 44% 56%, rgba(109, 222, 74, 0.92) 56% 100%);
+}
+
+.cooking-screen.heat-medium {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 241, 0.88), transparent 30%),
+    linear-gradient(135deg, rgba(255, 243, 74, 0.94) 0 44%, rgba(255, 250, 241, 0.88) 44% 56%, rgba(232, 115, 42, 0.92) 56% 100%);
+}
+
+.cooking-screen.heat-high {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 241, 0.82), transparent 30%),
+    linear-gradient(135deg, rgba(207, 51, 59, 0.94) 0 44%, rgba(255, 250, 241, 0.84) 44% 56%, rgba(207, 95, 226, 0.9) 56% 100%);
+}
+
+.cooking-header {
+  align-items: center;
+  min-height: 64px;
+}
+
+.cooking-header h1 {
+  margin-bottom: 0;
+}
+
+.cooktop {
+  min-height: 392px;
+  grid-template-columns: 82px minmax(0, 1fr) 72px;
+  align-items: stretch;
+  padding: 12px 10px 18px;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 250, 241, 0.5)),
+    rgba(255, 250, 241, 0.58);
+  border: 3px solid rgba(255, 255, 255, 0.72);
+  box-shadow: 0 10px 0 rgba(66, 33, 63, 0.12);
+}
+
+.selected-rail,
+.seasoning-panel {
+  align-self: stretch;
+  justify-content: flex-start;
+  padding: 8px 6px;
+  border-radius: 18px;
+  background: rgba(255, 250, 241, 0.66);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.58);
+}
+
+.selected-rail h2,
+.seasoning-panel h2 {
+  margin-bottom: 2px;
+  color: var(--soda-ink);
+}
+
+.selected-rail .ingredient-card {
+  min-height: 66px;
+  padding: 5px 3px;
+  gap: 2px;
+  border-width: 2px;
+  box-shadow: 0 4px 0 rgba(66, 33, 63, 0.1);
+}
+
+.selected-rail .ingredient-emoji {
+  font-size: 24px;
+}
+
+.selected-rail .ingredient-name {
+  font-size: 11px;
+}
+
+.pan-station {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  justify-items: center;
+  padding: 6px 0 0;
+}
+
+.pan-status {
+  width: min(142px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 250, 241, 0.82);
+  color: var(--soda-ink);
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 5px 0 rgba(66, 33, 63, 0.12);
+}
+
+.pan-status strong {
+  display: grid;
+  place-items: center;
+  min-width: 36px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--soda-ink);
+  color: #fffaf1;
+}
+
+.pan {
+  width: min(178px, 100%);
+  align-self: start;
+  margin-top: 6px;
+  padding: 13px;
+}
+
+.pan .pan-inner {
+  padding: 18px;
+}
+
+.pan-inner p {
+  max-width: 92px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.pan-food {
+  font-size: 32px;
+}
+
+.pan-handle {
+  width: 32px;
+  height: 62px;
+  bottom: -46px;
+}
+
+.seasoning-list {
+  gap: 7px;
+}
+
+.seasoning {
+  min-height: 48px;
+  border-width: 2px;
+  box-shadow: 0 4px 0 rgba(66, 33, 63, 0.1);
+}
+
+.seasoning span {
+  font-size: 22px;
+}
+
+.seasoning small {
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.cooking-actions {
+  margin-top: 0;
+}
+
+.hint {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 250, 241, 0.68);
+  color: var(--soda-ink);
+  font-weight: 800;
+}
+
+/* Soda ad atmosphere for the cooking stage */
+.cooking-screen {
+  position: relative;
+  isolation: isolate;
+}
+
+.cooking-screen::before,
+.cooking-screen::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cooking-screen::before {
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.78) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.46) 0 1px, transparent 2px);
+  background-position: 22px 80px, 70px 34px;
+  background-size: 68px 84px, 54px 62px;
+  opacity: 0.65;
+}
+
+.cooking-screen::after {
+  width: 180px;
+  height: 180px;
+  right: -72px;
+  top: 92px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 44%, rgba(255, 250, 241, 0.52) 45% 50%, transparent 51%),
+    conic-gradient(from 10deg, rgba(255, 250, 241, 0.8) 0 12deg, transparent 12deg 45deg, rgba(255, 250, 241, 0.72) 45deg 58deg, transparent 58deg 90deg);
+  opacity: 0.7;
+}
+
+.cooking-screen.heat-low,
+.cooking-screen.heat-medium,
+.cooking-screen.heat-high {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 32%),
+    linear-gradient(135deg, #00d9d8 0%, #18e0d6 45%, #fff7cc 45% 58%, #ff8b22 58% 100%);
+}
+
+.cooking-screen.heat-low {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26), transparent 32%),
+    linear-gradient(135deg, #00d9d8 0%, #22dfdb 46%, #fff7cc 46% 58%, #6dde4a 58% 100%);
+}
+
+.cooking-screen.heat-high {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 32%),
+    linear-gradient(135deg, #00d9d8 0%, #14d7d4 42%, #ffef43 42% 54%, #f05a23 54% 74%, #cf333b 74% 100%);
+}
+
+.cooking-header,
+.heat-control,
+.cooktop,
+.cooking-actions,
+.hint {
+  position: relative;
+  z-index: 1;
+}
+
+.cooking-header {
+  padding: 10px 12px;
+  border-radius: 20px;
+  background: rgba(255, 250, 241, 0.78);
+  border: 3px solid rgba(255, 255, 255, 0.72);
+  box-shadow: 0 7px 0 rgba(66, 33, 63, 0.12);
+}
+
+.cooking-header h1 {
+  font-size: 30px;
+  letter-spacing: 0.01em;
+}
+
+.cooktop {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 186, 51, 0.96), rgba(232, 115, 42, 0.95)),
+    var(--soda-orange);
+  border-color: rgba(255, 250, 241, 0.88);
+  box-shadow: 0 12px 0 rgba(134, 27, 36, 0.26), 0 20px 30px rgba(66, 33, 63, 0.16);
+}
+
+.cooktop::before {
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  top: 28%;
+  height: 70px;
+  background:
+    radial-gradient(60px 28px at 6% 0%, transparent 58%, rgba(207, 51, 59, 0.95) 60% 100%),
+    radial-gradient(60px 28px at 18% 100%, rgba(207, 51, 59, 0.95) 0 58%, transparent 60%),
+    linear-gradient(90deg, rgba(207, 51, 59, 0.95), rgba(134, 27, 36, 0.95));
+  opacity: 0.92;
+}
+
+.cooktop::after {
+  content: "REMIX";
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  color: rgba(255, 250, 241, 0.24);
+  font-size: 44px;
+  font-weight: 1000;
+  letter-spacing: -0.06em;
+}
+
+.selected-rail,
+.seasoning-panel,
+.pan-station {
+  position: relative;
+  z-index: 1;
+}
+
+.selected-rail,
+.seasoning-panel {
+  background: rgba(255, 250, 241, 0.78);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.58), 0 7px 0 rgba(66, 33, 63, 0.12);
+}
+
+.pan-station {
+  align-self: stretch;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 241, 0.22), rgba(255, 250, 241, 0.06));
+}
+
+.pan-status {
+  background: #fffaf1;
+  color: var(--soda-wine);
+  box-shadow: 0 6px 0 rgba(134, 27, 36, 0.2);
+}
+
+.pan {
+  width: min(188px, 100%);
+  background:
+    radial-gradient(circle at 50% 52%, #f7f7f7 0 48%, #b9b9b9 49% 58%, #626262 59% 66%, #252525 67% 100%);
+  box-shadow: 0 12px 0 rgba(134, 27, 36, 0.24), 0 22px 32px rgba(66, 33, 63, 0.2);
+}
+
+.pan .pan-inner {
+  color: #fffaf1;
+  background:
+    radial-gradient(circle at 36% 24%, rgba(255, 255, 255, 0.38), transparent 0 11%, transparent 12%),
+    radial-gradient(circle at 66% 26%, rgba(255, 255, 255, 0.28), transparent 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 44%, rgba(255, 247, 118, 0.26), transparent 24%),
+    radial-gradient(circle, #ff961f 0%, #d94b19 78%);
+}
+
+.pan.heat-low .pan-inner {
+  background:
+    radial-gradient(circle at 36% 24%, rgba(255, 255, 255, 0.38), transparent 0 11%, transparent 12%),
+    radial-gradient(circle at 66% 26%, rgba(255, 255, 255, 0.28), transparent 0 8%, transparent 9%),
+    radial-gradient(circle, #29d9d4 0%, #0b99a4 78%);
+}
+
+.pan.heat-high .pan-inner {
+  background:
+    radial-gradient(circle at 36% 24%, rgba(255, 255, 255, 0.4), transparent 0 11%, transparent 12%),
+    radial-gradient(circle at 66% 26%, rgba(255, 255, 255, 0.3), transparent 0 8%, transparent 9%),
+    radial-gradient(circle at 50% 44%, rgba(255, 238, 67, 0.24), transparent 24%),
+    radial-gradient(circle, #ff6b21 0%, #cf333b 78%);
+}
+
+.pan-inner p {
+  color: rgba(255, 250, 241, 0.9);
+  text-shadow: 0 2px 0 rgba(66, 33, 63, 0.18);
+}
+
+.selected-rail .ingredient-card,
+.seasoning {
+  background: rgba(255, 250, 241, 0.94);
+}
+
+.selected-rail .ingredient-card.is-cooked {
+  background: var(--soda-yellow);
+}
+
 @media (min-width: 460px) {
   .app-shell {
     padding: 24px;
@@ -710,4 +1324,479 @@ p {
     height: 58px;
     bottom: -42px;
   }
+}
+
+/* Clean cooking stage */
+.cooking-screen {
+  gap: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), transparent 34%),
+    linear-gradient(160deg, #64d8d6 0%, #fff7cc 58%, #ffb45f 100%);
+}
+
+.cooking-screen.heat-low {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 34%),
+    linear-gradient(160deg, #7ee4d8 0%, #fff7cc 32%, #ffd98b 68%, #ffbd73 100%);
+}
+
+.cooking-screen.heat-medium {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), transparent 34%),
+    linear-gradient(160deg, #67d8d1 0%, #ffe66d 24%, #ffbd4f 56%, #f58a35 82%, #cf333b 100%);
+}
+
+.cooking-screen.heat-high {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 34%),
+    linear-gradient(160deg, #64d8d6 0%, #ffd24c 34%, #ff8b22 62%, #e94732 100%);
+}
+
+.cooking-screen::before,
+.cooking-screen::after,
+.cooktop::before,
+.cooktop::after {
+  content: none;
+}
+
+.cooking-header {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.cooking-header h1 {
+  font-size: 30px;
+}
+
+.heat-control {
+  background: rgba(255, 250, 241, 0.82);
+  border: 2px solid rgba(255, 255, 255, 0.78);
+  box-shadow: 0 6px 0 rgba(66, 33, 63, 0.1);
+}
+
+.cooktop {
+  min-height: 386px;
+  padding: 12px 10px 18px;
+  border-radius: 22px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.selected-rail,
+.seasoning-panel {
+  background: transparent;
+  box-shadow: none;
+}
+
+.pan-station {
+  background: transparent;
+}
+
+.pan-status {
+  background: rgba(255, 250, 241, 0.9);
+  color: var(--soda-ink);
+  box-shadow: 0 5px 0 rgba(66, 33, 63, 0.1);
+}
+
+.pan {
+  background: #26201b;
+  box-shadow: 0 20px 34px rgba(66, 32, 12, 0.28);
+}
+
+.pan .pan-inner,
+.pan.heat-low .pan-inner,
+.pan.heat-medium .pan-inner,
+.pan.heat-high .pan-inner {
+  color: #fffaf1;
+  background: radial-gradient(circle, #774020 0%, #4e2d1c 78%);
+  box-shadow: inset 0 10px 22px rgba(255, 213, 142, 0.08), inset 0 -16px 24px rgba(25, 12, 7, 0.28);
+}
+
+.pan-inner p {
+  color: rgba(255, 250, 241, 0.92);
+}
+
+.pan-handle {
+  background: #2a201a;
+  box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.18);
+}
+
+.selected-rail .ingredient-card,
+.seasoning {
+  background: rgba(255, 250, 241, 0.94);
+  box-shadow: 0 4px 0 rgba(66, 33, 63, 0.08);
+}
+
+.hint {
+  background: rgba(255, 250, 241, 0.68);
+  box-shadow: none;
+}
+
+/* Unified youthful soda palette */
+:root {
+  --brand-sky: #21d7d2;
+  --brand-sky-soft: #8eeae5;
+  --brand-cream: #fff6c7;
+  --brand-card: #fffaf0;
+  --brand-orange: #ff8a22;
+  --brand-orange-soft: #ffbe57;
+  --brand-red: #e84834;
+  --brand-ink: #3c2543;
+  --brand-muted: #725f79;
+}
+
+.app-shell {
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.56), transparent 24%),
+    linear-gradient(145deg, rgba(33, 215, 210, 0.32), rgba(255, 246, 199, 0.72) 52%, rgba(255, 138, 34, 0.28)),
+    #f7f3ee;
+}
+
+.phone-frame {
+  background: var(--brand-cream);
+}
+
+.screen {
+  color: var(--brand-ink);
+  background:
+    radial-gradient(circle at 82% 8%, rgba(33, 215, 210, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.64), transparent 28%),
+    var(--brand-cream);
+}
+
+.landing-screen {
+  background:
+    radial-gradient(circle at 72% 16%, rgba(255, 255, 255, 0.48), transparent 22%),
+    linear-gradient(150deg, var(--brand-sky) 0%, var(--brand-cream) 54%, var(--brand-orange) 100%);
+}
+
+.landing-hero::before {
+  background: linear-gradient(135deg, var(--brand-sky) 0 34%, var(--brand-orange-soft) 34% 68%, var(--brand-red) 68% 100%);
+}
+
+h1 {
+  color: var(--brand-ink);
+}
+
+.eyebrow {
+  color: var(--brand-red);
+}
+
+.subtitle,
+.screen-header p,
+.cooking-header p,
+.song-info span,
+.song-info small,
+.ingredient-source,
+.section-title span,
+.result-duration {
+  color: var(--brand-muted);
+}
+
+.primary-button {
+  background: var(--brand-red);
+  box-shadow: 0 8px 0 #9f241c;
+}
+
+.secondary-button,
+.mini-button {
+  background: var(--brand-cream);
+  color: var(--brand-ink);
+  box-shadow: 0 5px 0 rgba(60, 37, 67, 0.14);
+}
+
+.text-button {
+  color: var(--brand-red);
+}
+
+.song-card,
+.song-card:nth-child(1),
+.song-card:nth-child(2),
+.song-card:nth-child(3),
+.flavor-grid,
+.ingredient-card,
+.recipe-card,
+.used-list {
+  color: var(--brand-ink);
+  background:
+    linear-gradient(90deg, var(--brand-orange) 0 7px, transparent 7px),
+    var(--brand-card);
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  box-shadow: 0 7px 0 rgba(60, 37, 67, 0.1);
+}
+
+.song-card:nth-child(1) .song-info span,
+.song-card:nth-child(1) .song-info small,
+.song-card:nth-child(3) .song-info span,
+.song-card:nth-child(3) .song-info small {
+  color: var(--brand-muted);
+}
+
+.cover-fallback {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.52), transparent 44%),
+    linear-gradient(145deg, var(--brand-sky), var(--brand-orange));
+}
+
+.meter-fill {
+  background: linear-gradient(90deg, var(--brand-sky), var(--brand-orange), var(--brand-red));
+}
+
+.ingredient-card.is-selected,
+.ingredient-card.is-cooked,
+.seasoning.active {
+  background: var(--brand-orange-soft);
+  border-color: var(--brand-ink);
+  box-shadow: 0 7px 0 rgba(60, 37, 67, 0.16);
+}
+
+.heat-control {
+  background: rgba(255, 250, 240, 0.84);
+  border: 2px solid rgba(255, 255, 255, 0.86);
+}
+
+.heat-control button.active {
+  background: var(--brand-ink);
+}
+
+.cooking-screen.heat-low {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.54), transparent 34%),
+    linear-gradient(155deg, var(--brand-sky-soft) 0%, var(--brand-cream) 58%, #ffd894 100%);
+}
+
+.cooking-screen.heat-medium {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 34%),
+    linear-gradient(155deg, var(--brand-sky) 0%, var(--brand-cream) 38%, var(--brand-orange-soft) 72%, var(--brand-orange) 100%);
+}
+
+.cooking-screen.heat-high {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 34%),
+    linear-gradient(155deg, var(--brand-sky) 0%, var(--brand-cream) 28%, var(--brand-orange) 58%, var(--brand-red) 100%);
+}
+
+.pan-status,
+.hint {
+  background: rgba(255, 250, 240, 0.82);
+  color: var(--brand-ink);
+}
+
+.selected-rail .ingredient-card,
+.seasoning {
+  background: rgba(255, 250, 240, 0.94);
+}
+
+.selected-rail .ingredient-card.is-cooked {
+  background: #8eeae5;
+}
+
+/* Cleaner song-select color accents */
+.song-card,
+.song-card:nth-child(1),
+.song-card:nth-child(2),
+.song-card:nth-child(3) {
+  background:
+    linear-gradient(90deg, var(--brand-sky) 0 8px, transparent 8px),
+    var(--brand-card);
+}
+
+.song-card:nth-child(1) {
+  background:
+    linear-gradient(90deg, var(--brand-red) 0 8px, transparent 8px),
+    var(--brand-card);
+}
+
+.song-card:nth-child(2) {
+  background:
+    linear-gradient(90deg, var(--brand-orange) 0 8px, transparent 8px),
+    var(--brand-card);
+}
+
+.song-card:nth-child(3) {
+  background:
+    linear-gradient(90deg, var(--brand-sky) 0 8px, transparent 8px),
+    var(--brand-card);
+}
+
+.song-card .cover-fallback {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 46%),
+    linear-gradient(145deg, #37e1dc, #fff6c7);
+}
+
+.song-card:nth-child(1) .cover-fallback {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 46%),
+    linear-gradient(145deg, #ff7b4a, #e84834);
+}
+
+.song-card:nth-child(2) .cover-fallback {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 46%),
+    linear-gradient(145deg, #fff06a, #ff8a22);
+}
+
+.song-card:nth-child(3) .cover-fallback {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 46%),
+    linear-gradient(145deg, #37e1dc, #21a7ff);
+}
+
+.result-screen {
+  background:
+    radial-gradient(circle at 80% 8%, rgba(33, 215, 210, 0.2), transparent 26%),
+    linear-gradient(160deg, var(--brand-cream) 0%, #ffe0a0 56%, rgba(255, 138, 34, 0.62) 100%);
+}
+
+.result-stat {
+  background: var(--brand-ink);
+}
+
+/* Cleaner analysis-page accents */
+.analysis-screen .flavor-grid {
+  background:
+    linear-gradient(90deg, var(--brand-sky) 0 8px, transparent 8px),
+    var(--brand-card);
+}
+
+.analysis-screen .meter-track {
+  background: rgba(60, 37, 67, 0.1);
+}
+
+.analysis-screen .meter-fill {
+  background: linear-gradient(90deg, var(--brand-sky) 0%, var(--brand-orange-soft) 72%, var(--brand-orange) 100%);
+}
+
+.analysis-screen .ingredient-grid .ingredient-card {
+  background: var(--brand-card);
+}
+
+.analysis-screen .ingredient-grid .ingredient-card:nth-child(1) {
+  border-color: rgba(33, 215, 210, 0.42);
+}
+
+.analysis-screen .ingredient-grid .ingredient-card:nth-child(2) {
+  border-color: rgba(255, 138, 34, 0.38);
+}
+
+.analysis-screen .ingredient-grid .ingredient-card:nth-child(3) {
+  border-color: rgba(232, 72, 52, 0.34);
+}
+
+.analysis-screen .ingredient-grid .ingredient-card:nth-child(4) {
+  border-color: rgba(255, 190, 87, 0.46);
+}
+
+/* Fresher result-page palette */
+.result-screen {
+  background:
+    radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.54), transparent 20%),
+    radial-gradient(circle at 88% 16%, rgba(33, 215, 210, 0.34), transparent 26%),
+    linear-gradient(155deg, #fff6c7 0%, #ffbe57 48%, #ff8a22 100%);
+}
+
+.result-screen .eyebrow,
+.result-duration {
+  color: rgba(60, 37, 67, 0.72);
+}
+
+.result-screen h1 {
+  color: var(--brand-ink);
+}
+
+.result-screen .recipe-card {
+  background:
+    linear-gradient(90deg, var(--brand-sky) 0 8px, transparent 8px),
+    #fffaf0;
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 0 rgba(60, 37, 67, 0.12);
+}
+
+.result-food {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), transparent 46%),
+    linear-gradient(145deg, var(--brand-sky-soft), var(--brand-cream));
+  border: 2px solid rgba(255, 255, 255, 0.86);
+}
+
+.result-stat {
+  color: var(--brand-ink);
+  border: 2px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 6px 0 rgba(60, 37, 67, 0.12);
+}
+
+.result-stat:nth-child(1) {
+  background: var(--brand-orange);
+}
+
+.result-stat:nth-child(2) {
+  background: var(--brand-sky-soft);
+}
+
+.result-stat:nth-child(3) {
+  background: var(--brand-cream);
+}
+
+.result-stat:nth-child(4) {
+  background: var(--brand-red);
+  color: #fffaf0;
+}
+
+.result-stat span {
+  color: currentColor;
+  opacity: 0.72;
+}
+
+.result-screen .used-list {
+  background:
+    linear-gradient(90deg, var(--brand-orange-soft) 0 8px, transparent 8px),
+    #fffaf0;
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 0 rgba(60, 37, 67, 0.1);
+}
+
+.result-screen .used-list p {
+  color: var(--brand-muted);
+}
+
+/* Clean page backgrounds outside landing and cooking */
+.select-screen,
+.analysis-screen,
+.prep-screen,
+.result-screen {
+  background-color: #fffaf0;
+}
+
+.select-screen {
+  background:
+    radial-gradient(circle at 84% 10%, rgba(33, 215, 210, 0.3), transparent 24%),
+    radial-gradient(circle at 8% 82%, rgba(255, 190, 87, 0.24), transparent 26%),
+    linear-gradient(155deg, #effffc 0%, #fffaf0 52%, #fff6c7 100%);
+}
+
+.analysis-screen {
+  background:
+    radial-gradient(circle at 78% 8%, rgba(33, 215, 210, 0.28), transparent 24%),
+    radial-gradient(circle at 10% 88%, rgba(255, 138, 34, 0.16), transparent 26%),
+    linear-gradient(155deg, #fffaf0 0%, #f2fffb 54%, #fff6c7 100%);
+}
+
+.prep-screen {
+  background:
+    radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.72), transparent 22%),
+    radial-gradient(circle at 88% 72%, rgba(33, 215, 210, 0.24), transparent 28%),
+    linear-gradient(155deg, #fff6c7 0%, #fffaf0 48%, #eafffb 100%);
+}
+
+.result-screen {
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.7), transparent 22%),
+    radial-gradient(circle at 86% 18%, rgba(33, 215, 210, 0.28), transparent 28%),
+    linear-gradient(155deg, #fffaf0 0%, #fff6c7 50%, #ffd78a 100%);
 }

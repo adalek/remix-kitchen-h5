@@ -16,7 +16,7 @@ const flavorLabels: Record<keyof FlavorProfile, string> = {
 
 function RecipeAnalysisScreen({ song, onBack, onNext }: RecipeAnalysisScreenProps) {
   return (
-    <section className="screen">
+    <section className="screen analysis-screen">
       <header className="screen-header compact">
         <button className="text-button" type="button" onClick={onBack}>
           ← 换歌

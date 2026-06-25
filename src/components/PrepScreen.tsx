@@ -15,7 +15,7 @@ const categoryOrder: IngredientCategory[] = ['base', 'bass', 'chords', 'atmosphe
 
 function PrepScreen({ song, selection, onChange, onBack, onNext }: PrepScreenProps) {
   return (
-    <section className="screen">
+    <section className="screen prep-screen">
       <header className="screen-header compact">
         <button className="text-button" type="button" onClick={onBack}>
           ← 分析

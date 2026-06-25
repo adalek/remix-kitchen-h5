@@ -94,7 +94,7 @@ function CookingScreen({
       <HeatControl value={heat} onChange={setHeat} />
 
       <div className="cooktop">
-        <div className="selected-rail">
+        <div className="selected-rail cook-tray">
           <h2>食材</h2>
           {ingredients.map((ingredient) => (
             <IngredientCard
@@ -106,19 +106,26 @@ function CookingScreen({
           ))}
         </div>
 
-        <div className={`pan heat-${heat}`}>
-          <div className="pan-inner">
-            {cookedItems.length === 0 ? (
-              <p>点击食材加入锅中</p>
-            ) : (
-              cookedItems.map((item) => (
-                <span className="pan-food" key={item.id}>
-                  {item.emoji}
-                </span>
-              ))
-            )}
+        <div className="pan-station">
+          <div className="pan-status">
+            <span>正在烹饪</span>
+            <strong>{cookedItems.length}/2</strong>
           </div>
-          <span className="pan-handle" />
+
+          <div className={`pan heat-${heat}`}>
+            <div className="pan-inner">
+              {cookedItems.length === 0 ? (
+                <p>点击食材加入锅中</p>
+              ) : (
+                cookedItems.map((item) => (
+                  <span className="pan-food" key={item.id}>
+                    {item.emoji}
+                  </span>
+                ))
+              )}
+            </div>
+            <span className="pan-handle" />
+          </div>
         </div>
 
         <SeasoningPanel selected={seasonings} onToggle={toggleSeasoning} />

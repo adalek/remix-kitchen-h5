@@ -8,7 +8,7 @@ type SongSelectScreenProps = {
 
 function SongSelectScreen({ songs, onBack, onSelect }: SongSelectScreenProps) {
   return (
-    <section className="screen">
+    <section className="screen select-screen">
       <header className="screen-header">
         <button className="text-button" type="button" onClick={onBack}>
           ← 回首页

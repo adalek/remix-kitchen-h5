@@ -63,6 +63,14 @@ function App() {
     setScreen('prep');
   };
 
+  const returnToPrep = () => {
+    stopTransport();
+    resetAllTracks();
+    setCookedItems([]);
+    setSeasonings([]);
+    setScreen('prep');
+  };
+
   return (
     <main className="app-shell">
       <div className="phone-frame">
@@ -94,7 +102,7 @@ function App() {
             setSeasonings={setSeasonings}
             heat={heat}
             setHeat={setHeat}
-            onBack={() => setScreen('prep')}
+            onBack={returnToPrep}
             onServe={() => setScreen('result')}
           />
         )}
