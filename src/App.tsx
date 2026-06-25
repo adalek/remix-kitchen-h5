@@ -20,13 +20,28 @@ const createDefaultSelection = (song: Song): SelectionState => ({
   vocal: song.originalIngredients.find((item) => item.category === 'vocal') ?? null,
 });
 
+const screenshotScreens: Screen[] = ['landing', 'select', 'analysis', 'prep', 'cooking', 'result'];
+
+const getScreenshotScreen = (): Screen | null => {
+  const shot = new URLSearchParams(window.location.search).get('shot');
+  return screenshotScreens.includes(shot as Screen) ? (shot as Screen) : null;
+};
+
 function App() {
-  const [screen, setScreen] = useState<Screen>('landing');
-  const [selectedSong, setSelectedSong] = useState<Song | null>(null);
-  const [selection, setSelection] = useState<SelectionState>(() => createDefaultSelection(songs[0]));
-  const [cookedItems, setCookedItems] = useState<IngredientOption[]>([]);
-  const [seasonings, setSeasonings] = useState<string[]>([]);
-  const [heat, setHeat] = useState<'low' | 'medium' | 'high'>('medium');
+  const screenshotScreen = getScreenshotScreen();
+  const screenshotSong = songs.find((song) => song.id === 'dafengchui') ?? songs[0];
+  const screenshotSelection = createDefaultSelection(screenshotSong);
+  const screenshotIngredients = Object.values(screenshotSelection).filter(Boolean) as IngredientOption[];
+  const [screen, setScreen] = useState<Screen>(screenshotScreen ?? 'landing');
+  const [selectedSong, setSelectedSong] = useState<Song | null>(screenshotScreen ? screenshotSong : null);
+  const [selection, setSelection] = useState<SelectionState>(() => screenshotSelection);
+  const [cookedItems, setCookedItems] = useState<IngredientOption[]>(
+    screenshotScreen === 'cooking' || screenshotScreen === 'result' ? screenshotIngredients.slice(0, 3) : [],
+  );
+  const [seasonings, setSeasonings] = useState<string[]>(
+    screenshotScreen === 'cooking' || screenshotScreen === 'result' ? ['chili', 'ice', 'honey', 'rain'] : [],
+  );
+  const [heat, setHeat] = useState<'low' | 'medium' | 'high'>(screenshotScreen === 'cooking' ? 'high' : 'medium');
 
   useEffect(() => {
     loadTracks(audioManifest);
@@ -72,7 +87,7 @@ function App() {
   };
 
   return (
-    <main className="app-shell">
+    <main className={screenshotScreen ? 'app-shell is-shot' : 'app-shell'}>
       <div className="phone-frame">
         {screen === 'landing' && <LandingScreen onStart={() => setScreen('select')} />}
         {screen === 'select' && <SongSelectScreen songs={songs} onBack={() => setScreen('landing')} onSelect={chooseSong} />}

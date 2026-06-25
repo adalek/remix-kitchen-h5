@@ -83,6 +83,20 @@ h2 {
     #f7f3ee;
 }
 
+.app-shell.is-shot {
+  width: 390px;
+  min-height: 844px;
+  place-items: start;
+  background: transparent;
+}
+
+.app-shell.is-shot .phone-frame {
+  width: 390px;
+  height: 844px;
+  max-height: none;
+  box-shadow: none;
+}
+
 .phone-frame {
   width: min(100vw, 390px);
   height: 100dvh;
