@@ -139,8 +139,6 @@ function CookingScreen({
           出锅
         </button>
       </footer>
-
-      {!canServe && <p className="hint">至少加入 2 种食材才能出锅。</p>}
     </section>
   );
 }
