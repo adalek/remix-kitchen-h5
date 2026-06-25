@@ -80,7 +80,7 @@ function CookingScreen({
   };
 
   return (
-    <section className="screen cooking-screen">
+    <section className={`screen cooking-screen heat-${heat}`}>
       <header className="cooking-header">
         <button className="text-button" type="button" onClick={onBack}>
           ← 备菜
