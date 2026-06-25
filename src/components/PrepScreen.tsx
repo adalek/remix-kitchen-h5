@@ -22,7 +22,7 @@ function PrepScreen({ song, selection, onChange, onBack, onNext }: PrepScreenPro
         </button>
         <p className="eyebrow">Step 2</p>
         <h1>备菜准备</h1>
-        <p>每类选一个味道。Vocal 是可选点缀。</p>
+        <p>AI 已为你挑选好适合搭配的食材</p>
       </header>
 
       <div className="prep-list">

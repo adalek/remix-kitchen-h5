@@ -46,6 +46,8 @@ export const ingredientAssets: Record<string, AssetItem> = {
 
 export const seasoningAssets: Record<string, AssetItem> = {
   chili: { id: 'chili', label: '辣椒', image: '/images/ingredients/chili.png', fallbackEmoji: '🌶️' },
+  salt: { id: 'salt', label: '盐', image: '/images/ingredients/salt.png', fallbackEmoji: '🧂' },
+  water: { id: 'water', label: '水', image: '/images/ingredients/water.png', fallbackEmoji: '💧' },
   honey: { id: 'honey', label: '蜂蜜', image: '/images/ingredients/honey.png', fallbackEmoji: '🍯' },
   ice: { id: 'ice', label: '冰块', image: '/images/ingredients/ice.png', fallbackEmoji: '🧊' },
   moon: { id: 'moon', label: '月亮酱', image: '/images/ingredients/moon.png', fallbackEmoji: '🌙' },

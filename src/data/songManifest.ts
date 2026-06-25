@@ -32,6 +32,7 @@ export type Song = {
   key: string;
   cover: string;
   coverFallback: string;
+  promptTags: string[];
   analysis: FlavorProfile;
   originalIngredients: IngredientOption[];
   ingredientOptions: Record<IngredientCategory, IngredientOption[]>;
@@ -118,6 +119,8 @@ export type SeasoningOption = {
 
 export const seasoningOptions: SeasoningOption[] = [
   { id: 'chili', label: seasoningAssets.chili.label, emoji: seasoningAssets.chili.fallbackEmoji, flavorDelta: { energy: 12 } },
+  { id: 'salt', label: seasoningAssets.salt.label, emoji: seasoningAssets.salt.fallbackEmoji, flavorDelta: { brightness: 6, energy: 3 } },
+  { id: 'water', label: seasoningAssets.water.label, emoji: seasoningAssets.water.fallbackEmoji, flavorDelta: { chill: 8, energy: -3 } },
   { id: 'honey', label: seasoningAssets.honey.label, emoji: seasoningAssets.honey.fallbackEmoji, flavorDelta: { brightness: 12 } },
   { id: 'ice', label: seasoningAssets.ice.label, emoji: seasoningAssets.ice.fallbackEmoji, flavorDelta: { chill: 12 } },
   { id: 'moon', label: seasoningAssets.moon.label, emoji: seasoningAssets.moon.fallbackEmoji, flavorDelta: { night: 12 } },
@@ -134,6 +137,7 @@ export const songs: Song[] = [
     key: 'F minor',
     cover: coverAssets.midnightWalk.image,
     coverFallback: coverAssets.midnightWalk.fallbackEmoji,
+    promptTags: ['lo-fi night walk', 'warm low end', 'soft pad', 'late-night ambience'],
     analysis: { energy: 56, brightness: 42, chill: 72, night: 88 },
     originalIngredients: [
       ingredientOptions.base[0],
@@ -152,6 +156,7 @@ export const songs: Song[] = [
     key: 'A major',
     cover: coverAssets.sunnyDay.image,
     coverFallback: coverAssets.sunnyDay.fallbackEmoji,
+    promptTags: ['city pop', 'bright synth chords', 'major feeling', 'sunny groove'],
     analysis: { energy: 76, brightness: 90, chill: 48, night: 20 },
     originalIngredients: [
       ingredientOptions.base[2],
@@ -170,6 +175,7 @@ export const songs: Song[] = [
     key: 'D minor',
     cover: coverAssets.oceanDrive.image,
     coverFallback: coverAssets.oceanDrive.fallbackEmoji,
+    promptTags: ['synthwave drive', 'ocean breeze', 'smooth bass', 'ambient texture'],
     analysis: { energy: 66, brightness: 64, chill: 62, night: 58 },
     originalIngredients: [
       ingredientOptions.base[1],

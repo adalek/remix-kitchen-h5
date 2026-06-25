@@ -1,5 +1,6 @@
 import * as Tone from 'tone';
 import type { IngredientCategory } from '../data/songManifest';
+import { getEffectiveSeasoningCounts } from '../data/seasoningLogic';
 
 export type AudioTrackManifest = {
   id: string;
@@ -29,6 +30,7 @@ type EffectGraph = {
   chorus: Tone.Chorus;
   delay: Tone.FeedbackDelay;
   reverb: Tone.Reverb;
+  output: Tone.Gain;
 };
 
 const tracks = new Map<string, TrackState>();
@@ -36,7 +38,7 @@ const activeByCategory = new Map<IngredientCategory, string>();
 let effectGraph: EffectGraph | null = null;
 let initialized = false;
 let currentHeat: HeatLevel = 'medium';
-let activeSeasonings = new Set<string>();
+let activeSeasonings: readonly string[] = [];
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
@@ -48,9 +50,10 @@ function getEffectGraph() {
     const chorus = new Tone.Chorus({ frequency: 1.5, delayTime: 2.5, depth: 0.45, wet: 0 }).start();
     const delay = new Tone.FeedbackDelay({ delayTime: '8n', feedback: 0.28, wet: 0 });
     const reverb = new Tone.Reverb({ decay: 2.4, preDelay: 0.03, wet: 0.12 });
+    const output = new Tone.Gain(1);
 
-    master.chain(filter, distortion, chorus, delay, reverb, Tone.Destination);
-    effectGraph = { master, filter, distortion, chorus, delay, reverb };
+    master.chain(filter, distortion, chorus, delay, reverb, output, Tone.Destination);
+    effectGraph = { master, filter, distortion, chorus, delay, reverb, output };
   }
 
   return effectGraph;
@@ -66,35 +69,58 @@ function applyEffects() {
   };
 
   const next = { ...heatSettings[currentHeat] };
+  const seasoning = getEffectiveSeasoningCounts(activeSeasonings);
 
-  if (activeSeasonings.has('chili')) {
-    next.gain += 0.05;
-    next.distortion += 0.28;
+  if (seasoning.chili > 0) {
+    next.gain += 0.04 * seasoning.chili;
+    next.distortion += 0.16 * seasoning.chili;
     next.filter = Math.max(next.filter, 10000);
   }
 
-  if (activeSeasonings.has('honey')) {
-    next.chorus += 0.22;
+  if (seasoning.honey > 0) {
+    next.chorus += 0.12 * seasoning.honey;
     next.filter = Math.max(next.filter, 12000);
   }
 
-  if (activeSeasonings.has('ice')) {
-    next.gain -= 0.04;
-    next.delay += 0.08;
-    next.reverb += 0.22;
+  if (seasoning.salt > 0) {
+    next.gain += 0.015 * seasoning.salt;
+    next.filter = Math.max(next.filter, 10500 + 500 * seasoning.salt);
+  }
+
+  if (seasoning.water > 0) {
+    next.gain -= 0.025 * seasoning.water;
+    next.delay += 0.04 * seasoning.water;
+    next.reverb += 0.08 * seasoning.water;
+    next.filter = Math.min(next.filter, 6400);
+  }
+
+  if (seasoning.ice > 0) {
+    next.gain -= 0.03 * seasoning.ice;
+    next.delay += 0.05 * seasoning.ice;
+    next.reverb += 0.12 * seasoning.ice;
     next.filter = Math.min(next.filter, 5200);
   }
 
-  if (activeSeasonings.has('moon')) {
-    next.reverb += 0.25;
-    next.delay += 0.04;
+  if (seasoning.moon > 0) {
+    next.reverb += 0.14 * seasoning.moon;
+    next.delay += 0.03 * seasoning.moon;
     next.filter = Math.min(next.filter, 3400);
   }
 
-  if (activeSeasonings.has('rain')) {
-    next.delay += 0.24;
-    next.reverb += 0.14;
+  if (seasoning.rain > 0) {
+    next.delay += 0.12 * seasoning.rain;
+    next.reverb += 0.08 * seasoning.rain;
     next.filter = Math.min(next.filter, 6200);
+  }
+
+  if (seasoning.chiliIceCancel > 0) {
+    next.distortion = Math.max(0, next.distortion - 0.12 * seasoning.chiliIceCancel);
+    next.gain -= 0.02 * seasoning.chiliIceCancel;
+  }
+
+  if (seasoning.honeyRainCancel > 0) {
+    next.chorus += 0.04 * seasoning.honeyRainCancel;
+    next.delay += 0.04 * seasoning.honeyRainCancel;
   }
 
   graph.master.gain.rampTo(clamp(next.gain, 0.55, 1.15), 0.12);
@@ -161,13 +187,17 @@ export async function startTransport() {
   } catch (error) {
     console.warn('[audioEngine] Audio buffers did not finish loading before playback.', error);
   }
+  getEffectGraph().output.gain.rampTo(1, 0.03);
   if (Tone.Transport.state !== 'started') {
     Tone.Transport.start();
   }
 }
 
 export function stopTransport() {
+  getEffectGraph().output.gain.cancelScheduledValues(Tone.now());
+  getEffectGraph().output.gain.value = 0;
   Tone.Transport.stop();
+  Tone.Transport.seconds = 0;
 }
 
 export function toggleTrack(trackId: string) {
@@ -181,10 +211,31 @@ export function toggleTrack(trackId: string) {
   if (isActive) {
     track.player.volume.value = -Infinity;
     activeByCategory.delete(track.category);
+    if (activeByCategory.size === 0) {
+      stopTransport();
+    }
     return;
   }
 
   replaceTrack(track.category, trackId);
+}
+
+export function removeTrack(trackId: string) {
+  const track = tracks.get(trackId);
+  if (!track?.player) {
+    console.warn(`[audioEngine] Track is not available: ${trackId}`);
+    return;
+  }
+
+  if (activeByCategory.get(track.category) !== trackId) return;
+
+  track.player.volume.cancelScheduledValues(Tone.now());
+  track.player.volume.value = -Infinity;
+  activeByCategory.delete(track.category);
+
+  if (activeByCategory.size === 0) {
+    stopTransport();
+  }
 }
 
 export function replaceTrack(category: IngredientCategory, trackId: string) {
@@ -196,10 +247,12 @@ export function replaceTrack(category: IngredientCategory, trackId: string) {
 
   tracks.forEach((track) => {
     if (track.category === category && track.player) {
+      track.player.volume.cancelScheduledValues(Tone.now());
       track.player.volume.value = -Infinity;
     }
   });
 
+  nextTrack.player.volume.cancelScheduledValues(Tone.now());
   nextTrack.player.volume.value = -8;
   activeByCategory.set(category, trackId);
 }
@@ -215,6 +268,7 @@ export function setVolume(trackId: string, volume: number) {
 }
 
 export function resetAllTracks() {
+  stopTransport();
   tracks.forEach((track) => {
     if (track.player) {
       track.player.volume.value = -Infinity;
@@ -222,7 +276,6 @@ export function resetAllTracks() {
   });
   activeByCategory.clear();
   resetEffects();
-  Tone.Transport.seconds = 0;
 }
 
 export function setHeatLevel(level: HeatLevel) {
@@ -231,12 +284,12 @@ export function setHeatLevel(level: HeatLevel) {
 }
 
 export function setSeasoningEffects(seasoningIds: readonly string[]) {
-  activeSeasonings = new Set(seasoningIds);
+  activeSeasonings = seasoningIds;
   applyEffects();
 }
 
 export function resetEffects() {
   currentHeat = 'medium';
-  activeSeasonings = new Set();
+  activeSeasonings = [];
   applyEffects();
 }

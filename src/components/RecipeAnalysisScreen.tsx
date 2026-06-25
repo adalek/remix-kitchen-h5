@@ -1,4 +1,4 @@
-import type { FlavorProfile, IngredientCategory, IngredientOption, Song } from '../data/songManifest';
+import type { FlavorProfile, IngredientCategory, Song } from '../data/songManifest';
 
 type RecipeAnalysisScreenProps = {
   song: Song;
@@ -22,11 +22,6 @@ const categoryCopy: Record<IngredientCategory, { music: string; kitchen: string 
 };
 
 function RecipeAnalysisScreen({ song, onBack, onNext }: RecipeAnalysisScreenProps) {
-  const originalIds = new Set(song.originalIngredients.map((ingredient) => ingredient.id));
-  const aiSuggestions = song.originalIngredients
-    .map((ingredient) => song.ingredientOptions[ingredient.category].find((option) => !originalIds.has(option.id)))
-    .filter((ingredient): ingredient is IngredientOption => Boolean(ingredient));
-
   return (
     <section className="screen analysis-screen">
       <header className="screen-header compact">
@@ -39,6 +34,20 @@ function RecipeAnalysisScreen({ song, onBack, onNext }: RecipeAnalysisScreenProp
         <p>AI 厨师先拆解原歌，再准备可替换的新食材。</p>
       </header>
 
+      <div className="section-title">
+        <h2>关键 AI 提示词</h2>
+        <span>先理解这首歌的味道</span>
+      </div>
+      <div className="prompt-card">
+        {song.promptTags.map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </div>
+
+      <div className="section-title">
+        <h2>风味数值</h2>
+        <span>AI 厨师的听感判断</span>
+      </div>
       <div className="flavor-grid">
         {(Object.keys(song.analysis) as Array<keyof FlavorProfile>).map((key) => (
           <div className="flavor-meter" key={key}>
@@ -72,17 +81,6 @@ function RecipeAnalysisScreen({ song, onBack, onNext }: RecipeAnalysisScreenProp
             </article>
           );
         })}
-      </div>
-
-      <div className="ai-brief-card compact">
-        <strong>备菜时可保留原味，也可换 AI 新食材</strong>
-        <div className="ai-suggestion-row">
-          {aiSuggestions.map((ingredient) => (
-            <span key={ingredient.id}>
-              {ingredient.emoji} {ingredient.label}
-            </span>
-          ))}
-        </div>
       </div>
 
       <button className="primary-button bottom-action" type="button" onClick={onNext}>

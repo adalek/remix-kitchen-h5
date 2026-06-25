@@ -1,4 +1,5 @@
 import { seasoningOptions, type FlavorProfile, type IngredientOption, type Song } from '../data/songManifest';
+import { getSeasoningCounts, getSeasoningFeedback, getSeasoningFlavorDelta } from '../data/seasoningLogic';
 import type { HeatLevel } from './HeatControl';
 
 type ResultScreenProps = {
@@ -12,6 +13,12 @@ type ResultScreenProps = {
 
 const clamp = (value: number) => Math.min(100, Math.max(0, Math.round(value)));
 
+const heatLabel: Record<HeatLevel, string> = {
+  low: '小火',
+  medium: '中火',
+  high: '大火',
+};
+
 function ResultScreen({ song, ingredients, seasonings, heat, onCookAgain, onHome }: ResultScreenProps) {
   const finalFlavor = ingredients.reduce<FlavorProfile>(
     (profile, ingredient) => ({
@@ -23,14 +30,11 @@ function ResultScreen({ song, ingredients, seasonings, heat, onCookAgain, onHome
     { ...song.analysis },
   );
 
-  seasonings.forEach((id) => {
-    const seasoning = seasoningOptions.find((item) => item.id === id);
-    if (!seasoning) return;
-    finalFlavor.energy += seasoning.flavorDelta.energy ?? 0;
-    finalFlavor.brightness += seasoning.flavorDelta.brightness ?? 0;
-    finalFlavor.chill += seasoning.flavorDelta.chill ?? 0;
-    finalFlavor.night += seasoning.flavorDelta.night ?? 0;
-  });
+  const seasoningDelta = getSeasoningFlavorDelta(seasonings);
+  finalFlavor.energy += seasoningDelta.energy ?? 0;
+  finalFlavor.brightness += seasoningDelta.brightness ?? 0;
+  finalFlavor.chill += seasoningDelta.chill ?? 0;
+  finalFlavor.night += seasoningDelta.night ?? 0;
 
   if (heat === 'low') finalFlavor.chill += 10;
   if (heat === 'high') finalFlavor.energy += 10;
@@ -43,22 +47,27 @@ function ResultScreen({ song, ingredients, seasonings, heat, onCookAgain, onHome
     night: clamp(finalFlavor.night),
   };
 
+  const seasoningCounts = getSeasoningCounts(seasonings);
+  const usedSeasonings = seasoningOptions.filter((item) => seasoningCounts[item.id]);
+  const seasoningFeedback = getSeasoningFeedback(seasonings);
+
   const chefComment =
-    final.night > 75
+    seasoningFeedback[0] ??
+    (final.night > 75
       ? '这道料理充满夜晚氛围，低频温暖，旋律轻松，很适合一个人戴着耳机散步。'
       : final.brightness > 75
         ? '这道料理清爽明亮，像阳光洒在厨房台面，适合给下午加一点跳动感。'
         : final.energy > 75
           ? '这道料理火候很足，节奏弹性强，适合把派对从第一口推到副歌。'
-          : '这道料理平衡顺口，鼓点、和弦和氛围都融合得很自然。';
-
-  const usedSeasonings = seasoningOptions.filter((item) => seasonings.includes(item.id));
+          : '这道料理平衡顺口，鼓点、和弦和氛围都融合得很自然。');
 
   return (
     <section className="screen result-screen">
       <p className="eyebrow">出锅评价</p>
       <h1>{remixName}</h1>
-      <p className="result-duration">时长 {song.duration} · 火候 {heat === 'low' ? '小火' : heat === 'high' ? '大火' : '中火'}</p>
+      <p className="result-duration">
+        时长 {song.duration} · 火候 {heatLabel[heat]}
+      </p>
 
       <div className="recipe-card">
         <div className="result-food">🍽️</div>
@@ -79,7 +88,17 @@ function ResultScreen({ song, ingredients, seasonings, heat, onCookAgain, onHome
         <h2>使用食材</h2>
         <p>{ingredients.map((item) => `${item.emoji} ${item.label}`).join(' · ')}</p>
         <h2>使用调味料</h2>
-        <p>{usedSeasonings.length ? usedSeasonings.map((item) => `${item.emoji} ${item.label}`).join(' · ') : '未添加'}</p>
+        <p>
+          {usedSeasonings.length
+            ? usedSeasonings.map((item) => `${item.emoji} ${item.label}×${seasoningCounts[item.id]}`).join(' · ')
+            : '未添加'}
+        </p>
+        {seasoningFeedback.length > 0 && (
+          <>
+            <h2>调味反应</h2>
+            <p>{seasoningFeedback.join(' · ')}</p>
+          </>
+        )}
       </div>
 
       <div className="result-actions">
