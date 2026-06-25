@@ -247,6 +247,11 @@ h2 {
   gap: 6px;
 }
 
+.landing-screen h2 {
+  font-size: 30px;
+  line-height: 1;
+}
+
 .landing-screen .primary-button {
   margin-top: auto;
 }
@@ -756,29 +761,15 @@ h2 {
 .pan-status {
   position: relative;
   z-index: 1;
-  width: min(142px, 100%);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 10px;
-  padding: 7px 10px;
-  border-radius: 999px;
-  background: rgba(255, 250, 240, 0.9);
-  color: var(--brand-ink);
-  font-size: 12px;
+  justify-content: center;
+  margin-bottom: 8px;
+  padding: 0;
+  color: rgba(60, 37, 67, 0.72);
+  font-size: 11px;
   font-weight: 1000;
-  box-shadow: 0 5px 0 rgba(60, 37, 67, 0.1);
-}
-
-.pan-status strong {
-  display: grid;
-  place-items: center;
-  min-width: 36px;
-  height: 24px;
-  border-radius: 999px;
-  background: var(--brand-ink);
-  color: #fffaf0;
+  text-shadow: 0 1px 0 rgba(255, 250, 240, 0.72);
 }
 
 .pan-rule-board {

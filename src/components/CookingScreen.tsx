@@ -251,8 +251,7 @@ function CookingScreen({
 
         <div className="pan-station">
           <div className="pan-status">
-            <span>正在烹饪</span>
-            <strong>{cookedItems.length}/2</strong>
+            <span>最少两种食材</span>
           </div>
 
           <div className="pan-rule-board">
