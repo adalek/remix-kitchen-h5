@@ -398,6 +398,138 @@ h2 {
   text-align: right;
 }
 
+.recipe-map {
+  display: grid;
+  gap: 10px;
+}
+
+.recipe-map.compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.recipe-map-item {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 14px;
+  background:
+    linear-gradient(90deg, var(--brand-sky) 0 7px, transparent 7px),
+    var(--brand-card);
+  box-shadow: 0 6px 0 rgba(60, 37, 67, 0.08);
+}
+
+.recipe-map-item div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.recipe-map-item span {
+  color: var(--brand-muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.recipe-map-item strong {
+  color: var(--brand-ink);
+  font-size: 15px;
+  font-weight: 1000;
+}
+
+.recipe-map-item p {
+  color: var(--brand-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.recipe-map-item em {
+  color: var(--brand-ink);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 1000;
+}
+
+.recipe-map.compact .recipe-map-item {
+  gap: 4px;
+  padding: 9px 10px;
+}
+
+.recipe-map.compact .recipe-map-item div {
+  display: grid;
+  gap: 3px;
+}
+
+.recipe-map.compact .recipe-map-item span {
+  font-size: 10px;
+}
+
+.recipe-map.compact .recipe-map-item strong {
+  font-size: 13px;
+}
+
+.recipe-map.compact .recipe-map-item p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.ai-brief-card {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  background:
+    linear-gradient(90deg, var(--brand-orange-soft) 0 8px, transparent 8px),
+    rgba(255, 250, 240, 0.92);
+  box-shadow: 0 6px 0 rgba(60, 37, 67, 0.08);
+}
+
+.ai-brief-card strong {
+  font-size: 15px;
+  font-weight: 1000;
+}
+
+.ai-brief-card.compact {
+  gap: 7px;
+  padding: 11px 12px;
+}
+
+.ai-brief-card.compact strong {
+  font-size: 13px;
+}
+
+.ai-brief-card p {
+  color: var(--brand-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.ai-suggestion-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+
+.ai-suggestion-row::-webkit-scrollbar {
+  display: none;
+}
+
+.ai-suggestion-row span {
+  flex: 0 0 auto;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: var(--brand-sky-soft);
+  color: var(--brand-ink);
+  font-size: 12px;
+  font-weight: 1000;
+}
+
 .ingredient-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
